@@ -1,0 +1,42 @@
+.product_list {
+  height: fit-content;
+  margin: 2em;
+
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: $spacing-sm;
+
+  @include respond('sm') {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: $spacing-sm;
+  }
+
+  @include respond('md') {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: $spacing-md;
+  }
+
+  @include respond('lg') {
+    grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+    gap: $spacing-lg;
+  }
+}
+
+.subinfo {
+  width: 60%;
+  margin: 5em auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  & p {
+    text-align: center;
+  }
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin: 2em;
+}

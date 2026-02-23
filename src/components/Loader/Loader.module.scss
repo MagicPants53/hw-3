@@ -1,0 +1,26 @@
+.loader {
+  --size: 32px;
+  width: var(--size);
+  height: var(--size);
+  margin: 8px;
+  animation: loader-spin 1s linear infinite;
+}
+
+.loader_small {
+  --size: 16px;
+  margin: 4px;
+}
+
+.loader_large {
+  --size: 40px;
+  margin: 10px;
+}
+
+@keyframes loader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
