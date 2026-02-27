@@ -7,30 +7,12 @@ import Button from 'components/Button';
 import Card from './components/Card';
 import Text from 'components/Text';
 
+import { paths } from '@/config/paths';
+import { apiUrls } from '@/config/apiUrls';
+import type { ProductType } from '@/shared/entity/product';
+import { mapRawProductsToList } from '@/shared/utils/productMapper';
+
 import styles from './Products.module.scss';
-
-export type ProductType = {
-  id: number;
-  documentId: string;
-  title: string;
-  description: string;
-  category: ProductCategory;
-  images: ProductImages[];
-  price: number;
-  discountPercent: number;
-  rating: number;
-};
-
-type ProductCategory = {
-  id: number;
-  documentId: string;
-  title: string;
-};
-
-type ProductImages = {
-  id: number;
-  url: string;
-};
 
 const Products = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -44,43 +26,12 @@ const Products = () => {
     const fetch = async () => {
       const result = await axios({
         method: 'GET',
-        url: `https://front-school-strapi.ktsdev.ru/api/products?${query}`,
+        url: apiUrls.products(query),
       });
 
       setAmount(result.data.meta.pagination.total);
 
-      setProducts(
-        result.data.data.map(
-          (raw: {
-            id: number;
-            documentId: string;
-            title: string;
-            description: string;
-            productCategory: { id: number; documentId: string; title: string };
-            images: { id: number; url: string }[];
-            price: number;
-            discountPercent: number;
-            rating: number;
-          }) => ({
-            id: raw.id,
-            documentId: raw.documentId,
-            title: raw.title,
-            description: raw.description,
-            category: {
-              id: raw.productCategory.id,
-              documentId: raw.productCategory.documentId,
-              title: raw.productCategory.title,
-            },
-            images: raw.images.map((image: { id: number; url: string }) => ({
-              id: image.id,
-              url: image.url,
-            })),
-            price: raw.price,
-            discountPercent: raw.discountPercent,
-            rating: raw.rating,
-          })
-        )
-      );
+      setProducts(mapRawProductsToList(result.data.data));
     };
     fetch();
   }, []);
@@ -102,7 +53,7 @@ const Products = () => {
       </div>
       <div className={styles.product_list}>
         {products.map((product) => (
-          <Link to={`/products/${product.documentId}`} key={product.id}>
+          <Link to={`${paths.products}/${product.documentId}`} key={product.id}>
             <Card
               key={product.id}
               image={product.images[0].url}

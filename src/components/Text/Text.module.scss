@@ -3,6 +3,8 @@
   font-family: $font-family;
   text-align: left;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .text_title {

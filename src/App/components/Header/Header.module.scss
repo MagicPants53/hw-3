@@ -1,4 +1,4 @@
-.header {
+header {
   position: sticky;
   top: 0;
   background-color: $header-bg-color;
@@ -8,105 +8,16 @@
   align-items: center;
   border-bottom: 2px solid $header-border-color;
   z-index: 900;
-}
 
-.tabs {
-  display: flex;
-  gap: 3em;
-}
-
-.actions {
-  display: flex;
-  gap: 1em;
-}
-
-.burger {
-  display: none;
-}
-
-.burger_btn {
-  background: none;
-  border: 0;
-}
-
-@media (max-width: 768px) {
-  .burger {
-    display: block;
+  &.header_desktop {
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
-  .tabs {
-    display: none;
-  }
-
-  .actions {
-    display: none;
-  }
-
-  .icons {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .modal {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    z-index: 1000;
-
-    &.open {
-      right: 0;
-    }
-
-    .modal_content {
-      position: relative;
-      background-color: $header-bg-color;
-      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-      padding: 2rem;
-      width: 250px;
-      height: 100vh;
-      right: -100%;
-      transition: right 0.5s ease;
-
-      display: flex;
-      flex-direction: column;
-      gap: 30%;
-    }
-
-    &.open .modal_content {
-      right: 0;
-      z-index: 1001;
-    }
-
-    & .actions {
-      display: flex;
-      gap: 1em;
-    }
-
-    & .tabs {
-      display: flex;
-      flex-direction: column;
-      gap: 3em;
-    }
-
-    &::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.5);
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      overflow: hidden;
-    }
-
-    &.open::before {
-      z-index: -1;
-      opacity: 1;
-      visibility: visible;
+  &.header_mobile {
+    @media (min-width: 769px) {
+      display: none;
     }
   }
 }

@@ -36,7 +36,9 @@ const Button: React.FC<ButtonProps> = ({ loading, children, ...props }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       {isLoading ? <Loader size="s" /> : null}
-      <Text view="button">{children}</Text>
+      <Text view="button" maxLines={1}>
+        {children}
+      </Text>
     </button>
   );
 };

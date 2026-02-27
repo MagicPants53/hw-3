@@ -10,6 +10,7 @@
 
 .card:hover {
   box-shadow: 0 4px 10px #00000040;
+  color: initial;
 }
 
 .card_img {
@@ -42,4 +43,12 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: 24px;
+
+  & .actionSlot {
+    max-width: 70%;
+  }
+
+  & .contentSlot {
+    max-width: 30%;
+  }
 }

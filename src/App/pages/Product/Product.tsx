@@ -3,14 +3,17 @@ import { Link, useParams } from 'react-router';
 import axios from 'axios';
 import qs from 'qs';
 
-import type { ProductType } from '../Products';
 import Loader from '@/components/Loader';
 import Text from '@/components/Text';
+import ArrowDownIcon from '@/components/icons/ArrowDownIcon';
+
+import { paths } from '@/config/paths';
+import { apiUrls } from '@/config/apiUrls';
+import type { ProductType } from '@/shared/entity/product';
+import { mapRawToProduct } from '@/shared/utils/productMapper';
 
 import styles from './Product.module.scss';
-import ArrowDownIcon from '@/components/icons/ArrowDownIcon';
-import Slider from './component/Slider';
-import Button from '@/components/Button';
+import ProductInfo from './component/ProductInfo';
 
 const Product = () => {
   const { documentId } = useParams();
@@ -18,7 +21,7 @@ const Product = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (documentId === '') return;
+    if (documentId === '' || !documentId) return;
     const query = qs.stringify({
       populate: ['images', 'productCategory'],
     });
@@ -27,27 +30,10 @@ const Product = () => {
       try {
         const result = await axios({
           method: 'GET',
-          url: `https://front-school-strapi.ktsdev.ru/api/products/${documentId}?${query}`,
+          url: apiUrls.product(documentId, query),
         });
 
-        setProduct({
-          id: result.data.data.id,
-          documentId: result.data.data.documentId,
-          title: result.data.data.title,
-          description: result.data.data.description,
-          category: {
-            id: result.data.data.productCategory.id,
-            documentId: result.data.data.productCategory.documentId,
-            title: result.data.data.productCategory.title,
-          },
-          images: result.data.data.images.map((image: { id: number; url: string }) => ({
-            id: image.id,
-            url: image.url,
-          })),
-          price: result.data.data.price,
-          discountPercent: result.data.data.discountPercent,
-          rating: result.data.data.rating,
-        });
+        setProduct(mapRawToProduct(result.data.data));
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -71,25 +57,12 @@ const Product = () => {
   return (
     <div className={styles.product}>
       <div className={styles.back_link}>
-        <Link to="/products">
+        <Link to={paths.products}>
           <ArrowDownIcon style={{ transform: 'rotate(90deg)' }} />
           <Text view="p-20">Назад</Text>
         </Link>
       </div>
-      <div className={styles.content}>
-        <Slider imgPaths={product?.images.map((img) => img.url)} />
-        <div className={styles.info}>
-          <Text view="title">{product?.title}</Text>
-          <Text view="p-20" color="secondary">
-            {product?.description}
-          </Text>
-          <Text view="title">${Number(product?.price).toFixed(2)}</Text>
-          <div className={styles.btns}>
-            <Button>Buy Now</Button>
-            <Button className={styles.cart}>Add to Cart</Button>
-          </div>
-        </div>
-      </div>
+      <ProductInfo product={product} />
     </div>
   );
 };

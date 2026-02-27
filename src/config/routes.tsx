@@ -8,17 +8,20 @@ import AboutUs from '@/App/pages/AboutUs';
 import Cart from '@/App/pages/User';
 import User from '@/App/pages/Cart';
 
+import { paths } from './paths';
+
 export const routesConfig: RouteObject[] = [
   {
     path: '/',
     element: <App />,
     children: [
-      { path: '/products', element: <Products /> },
-      { path: '/products/:documentId', element: <Product /> },
-      { path: '/categories', element: <Categories /> },
-      { path: '/about_us', element: <AboutUs /> },
-      { path: '/cart', element: <Cart /> },
-      { path: '/user', element: <User /> },
+      { index: true, element: <Products /> },
+      { path: paths.products, element: <Products /> },
+      { path: paths.product, element: <Product /> },
+      { path: paths.categories, element: <Categories /> },
+      { path: paths.aboutUs, element: <AboutUs /> },
+      { path: paths.cart, element: <Cart /> },
+      { path: paths.user, element: <User /> },
     ],
   },
 ];

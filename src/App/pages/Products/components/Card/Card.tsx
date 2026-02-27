@@ -52,11 +52,13 @@ const Card: React.FC<CardProps> = ({
         </div>
         <div className={styles.card_footer}>
           {contentSlot ? (
-            <Text view="p-18" weight="bold">
-              {contentSlot}
-            </Text>
+            <div className={styles.contentSlot}>
+              <Text view="p-18" weight="bold">
+                {contentSlot}
+              </Text>
+            </div>
           ) : null}
-          {actionSlot}
+          <div className={styles.actionSlot}>{actionSlot}</div>
         </div>
       </div>
     </div>
