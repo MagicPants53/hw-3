@@ -1,0 +1,22 @@
+.burger_btn {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal_actions {
+  display: flex;
+  gap: 1em;
+}
+
+.modal_tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}

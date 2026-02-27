@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $site-bg-color;
+  font-family: $font-family;
+  color: $primary-color;
+}
+
+a,
+a:active,
+a:link,
+a:visited {
+  text-decoration: none;
+  color: initial;
+}
+
+a:hover {
+  color: $accent-color;
+}
+
+#root {
+  margin: 0 auto;
+  text-align: center;
+
+  @include respond('sm') {
+    max-width: 668px;
+  }
+
+  @include respond('md') {
+    max-width: 924px;
+  }
+
+  @include respond('lg') {
+    max-width: 1240px;
+  }
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}

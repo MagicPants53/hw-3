@@ -1,0 +1,54 @@
+.slider {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex: 0 0 50%;
+  height: fit-content;
+  aspect-ratio: 1 / 1;
+
+  & .slider_content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: fit-content;
+
+    transition: transform 0.3s ease;
+  }
+
+  & .slide {
+    flex: 0 0 100%;
+    height: fit-content;
+  }
+
+  & img {
+    width: 100%;
+  }
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: $primary-color;
+  border: 0;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  padding: 1em;
+  cursor: pointer;
+
+  & svg {
+    display: flex;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &.btn_prev {
+    left: 5%;
+  }
+
+  &.btn_next {
+    right: 5%;
+  }
+}

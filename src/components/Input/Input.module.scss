@@ -1,0 +1,30 @@
+.input-container {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  height: 52px;
+  padding: 14px 12px;
+  gap: 8px;
+  background-color: #ffffff;
+  border: none;
+
+  font-size: 16px;
+  line-height: 20px;
+  font-family: 'Roboto';
+}
+
+.input:focus {
+  border: 1px solid #518581;
+  outline: none;
+}
+
+.input-after-slot {
+  position: absolute;
+  right: 12px;
+}

@@ -1,0 +1,28 @@
+.product {
+  margin-bottom: 3em;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  margin: 5em;
+
+  & p {
+    text-align: center;
+  }
+}
+
+.back_link {
+  width: fit-content;
+  margin: 1em;
+
+  & a {
+    display: flex;
+    gap: 1em;
+    padding: 1em;
+  }
+
+  &:hover path {
+    fill: $accent-color;
+  }
+}

@@ -1,0 +1,57 @@
+.text_component {
+  font-weight: 400;
+  font-family: $font-family;
+  text-align: left;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text_title {
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 48px;
+}
+
+.text_subtitle {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 36px;
+}
+
+.text_button {
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.text_p-20 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.text_p-18 {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.text_p-16 {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.text_p-14 {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.color_primary {
+  color: $primary-color;
+}
+
+.color_secondary {
+  color: $secondary-color;
+}
+
+.color_accent {
+  color: $accent-color;
+}
