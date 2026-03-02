@@ -13,4 +13,5 @@ export const apiUrls = {
     query
       ? `${API_BASE_URL}${paths.products}/${documentId}?${query}`
       : `${API_BASE_URL}${paths.products}/${documentId}`,
+  productCategories: () => `${API_BASE_URL}${paths.productCategories}`,
 } as const;

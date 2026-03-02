@@ -8,6 +8,10 @@ export type ProductType = {
   price: number;
   discountPercent: number;
   rating: number;
+  createdAt: Date;
+  publishedAt: Date;
+  updatedAt: Date;
+  isInStock: boolean;
 };
 
 export type ProductCategory = {

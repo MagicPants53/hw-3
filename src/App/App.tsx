@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router';
 
-import './App.scss';
 import Header from '@/App/components/Header';
+
+import './App.scss';
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import type { RouteObject } from 'react-router';
+import { Navigate, type RouteObject } from 'react-router';
 
 import App from '@/App';
 import Product from '@/App/pages/Product';
@@ -23,5 +23,9 @@ export const routesConfig: RouteObject[] = [
       { path: paths.cart, element: <Cart /> },
       { path: paths.user, element: <User /> },
     ],
+  },
+  {
+    path: '*',
+    element: <Navigate to="/" />,
   },
 ];

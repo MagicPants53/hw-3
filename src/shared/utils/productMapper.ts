@@ -10,6 +10,10 @@ type RawProduct = {
   price: number;
   discountPercent: number;
   rating: number;
+  createdAt: string;
+  publishedAt: string;
+  updatedAt: string;
+  isInStock: boolean;
 };
 
 export const mapRawToProduct = (raw: RawProduct): ProductType => ({
@@ -29,6 +33,10 @@ export const mapRawToProduct = (raw: RawProduct): ProductType => ({
   price: raw.price,
   discountPercent: raw.discountPercent,
   rating: raw.rating,
+  createdAt: new Date(raw.createdAt),
+  publishedAt: new Date(raw.publishedAt),
+  updatedAt: new Date(raw.updatedAt),
+  isInStock: raw.isInStock,
 });
 
 export const mapRawProductsToList = (raws: RawProduct[]): ProductType[] =>

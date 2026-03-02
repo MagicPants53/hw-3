@@ -16,6 +16,10 @@
   margin: 10px;
 }
 
+.loader_huge {
+  --size: min(8vh, 8vw);
+}
+
 @keyframes loader-spin {
   0% {
     transform: rotate(0deg);
