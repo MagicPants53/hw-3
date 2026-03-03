@@ -5,5 +5,7 @@ export const paths = {
   categories: '/categories',
   aboutUs: '/about_us',
   cart: '/cart',
-  user: '/user',
+  profile: '/profile',
+  login: '/auth/local',
+  register: '/auth/local/register',
 };

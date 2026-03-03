@@ -23,7 +23,7 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
         <Text view="title">${Number(product?.price).toFixed(2)}</Text>
         <div className={styles.btns}>
           <Button>Buy Now</Button>
-          <Button className={styles.cart}>Add to Cart</Button>
+          <Button view="ghost">Add to Cart</Button>
         </div>
       </div>
     </div>

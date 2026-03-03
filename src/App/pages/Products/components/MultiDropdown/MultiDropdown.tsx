@@ -77,7 +77,11 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
           setSearch(value);
         }}
         placeholder={getTitle(value)}
-        afterSlot={<ArrowDownIcon style={{ cursor: 'pointer' }} color="secondary" />}
+        afterSlot={
+          <button onClick={() => setIsOpen(true)}>
+            <ArrowDownIcon color="secondary" />
+          </button>
+        }
         onClick={() => (!disabled ? setIsOpen(true) : null)}
       />
       {isOpen && !disabled && filteredOptions.length > 0 && (

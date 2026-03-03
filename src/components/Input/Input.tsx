@@ -17,11 +17,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className={`${styles.inputContainer} ${props.className ? props.className : ''}`}>
         <input
           ref={ref}
-          {...props}
           className={styles.input}
           type="text"
           value={value}
           onChange={(e: React.ChangeEvent) => onChange((e.target as HTMLInputElement).value)}
+          {...props}
         />
         {afterSlot ? <div className={styles.inputAfterSlot}>{afterSlot}</div> : null}
       </div>

@@ -2,12 +2,12 @@ import { useEffect, useCallback } from 'react';
 
 export function useLockScroll(
   isOpen: boolean,
-  ref: React.RefObject<HTMLElement | null>,
-  onClose: () => void
+  onClose: () => void,
+  ref?: React.RefObject<HTMLElement | null>
 ) {
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
-      if (ref.current && ref.current === event.target) {
+      if (ref && ref.current && ref.current === event.target) {
         onClose();
       }
     },

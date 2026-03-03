@@ -8,11 +8,13 @@ import Loader from '../Loader';
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   /** Состояние загрузки */
   loading?: boolean;
+  /** Тип кнопки */
+  view?: 'normal' | 'ghost';
   /** Текст кнопки */
   children: React.ReactNode;
 };
 
-const Button: React.FC<ButtonProps> = ({ loading, children, ...props }) => {
+const Button: React.FC<ButtonProps> = ({ loading, view = 'normal', children, ...props }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isPressed, setIsPressed] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -28,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({ loading, children, ...props }) => {
         btn_pressed: isPressed && !isLoading,
         btn_over: !isPressed && isHovered && !isLoading,
         btn_disabled: props.disabled,
+        ghost: view === 'ghost',
       })}
       disabled={isLoading || props.disabled}
       onMouseDown={() => setIsPressed(true)}

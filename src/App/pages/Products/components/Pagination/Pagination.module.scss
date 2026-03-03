@@ -1,0 +1,25 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  & button {
+    padding: 0.5em 1em;
+  }
+
+  & .btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover path {
+      fill: $accent-color;
+    }
+
+    &:disabled path {
+      fill: $secondary-color;
+    }
+  }
+}
