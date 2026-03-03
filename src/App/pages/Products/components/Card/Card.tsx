@@ -21,6 +21,8 @@ export type CardProps = {
   onClick?: React.MouseEventHandler;
   /** Слот для действия */
   actionSlot?: React.ReactNode;
+  /** Заглушка при загрузке данных */
+  loading?: boolean;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -32,7 +34,29 @@ const Card: React.FC<CardProps> = ({
   contentSlot,
   onClick,
   actionSlot,
+  loading,
 }) => {
+  if (loading) {
+    return (
+      <div className={`${styles.card} ${styles.loading} ${className}`} onClick={onClick}>
+        <div className={styles.skeletonImage}></div>
+        <div className={styles.card_body}>
+          <div className={styles.card_content}>
+            <div className={styles.skeletonCaptionSlot}></div>
+            <div className={styles.skeletonTitle}></div>
+            <div className={styles.skeletonSubTitle}></div>
+            <div className={styles.skeletonSubTitle}></div>
+            <div className={styles.skeletonSubTitle}></div>
+          </div>
+          <div className={styles.card_footer}>
+            <div className={styles.skeletonContentSlot}></div>
+            <div className={styles.skeletonActionSlot}></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`${styles.card} ${className}`} onClick={onClick}>
       {image !== '' ? <img className={styles.card_img} alt="" src={image} /> : null}

@@ -1,0 +1,75 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+
+  .modalContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background: $site-bg-color;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: modalSlideIn 0.3s ease-out;
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    .modalToggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding-top: 1rem;
+
+      button {
+        padding: 0;
+        background: none;
+        border: none;
+        color: $link-color;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .error {
+      color: $error-color;
+      text-align: center;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

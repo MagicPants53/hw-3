@@ -40,3 +40,26 @@
   gap: 1em;
   margin: 2em;
 }
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem;
+  flex-wrap: wrap;
+
+  & .categoryFilter {
+    min-width: 100%;
+
+    @include respond('sm') {
+      min-width: 70%;
+    }
+
+    @include respond('md') {
+      min-width: 35%;
+    }
+
+    @include respond('lg') {
+      min-width: 28%;
+    }
+  }
+}

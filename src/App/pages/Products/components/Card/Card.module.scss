@@ -6,6 +6,7 @@
   height: 100%;
   background-color: $card-bg-color;
   transition: all 0.4s ease;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -50,5 +51,60 @@
 
   & .contentSlot {
     max-width: 30%;
+  }
+}
+
+.card.loading:hover {
+  box-shadow: none;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+.skeletonImage {
+  @extend .skeleton;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.skeletonCaptionSlot {
+  @extend .skeleton;
+  height: 1em;
+  width: 60%;
+}
+
+.skeletonTitle {
+  @extend .skeleton;
+  height: 2em;
+  width: 80%;
+}
+
+.skeletonSubTitle {
+  @extend .skeleton;
+  height: 1em;
+  width: 100%;
+}
+
+.skeletonContentSlot {
+  @extend .skeleton;
+  height: 1.5em;
+  width: 20%;
+}
+
+.skeletonActionSlot {
+  @extend .skeleton;
+  height: 3em;
+  width: 40%;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
   }
 }

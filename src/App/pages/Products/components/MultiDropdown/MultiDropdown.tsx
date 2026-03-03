@@ -3,7 +3,7 @@ import Input from 'components/Input';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
 import Text from 'components/Text';
 
-import './MultiDropdown.css';
+import styles from './MultiDropdown.module.scss';
 
 export type Option = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
@@ -69,7 +69,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   };
 
   return (
-    <div ref={containerRef} className={`multi-dropdown ${className}`}>
+    <div ref={containerRef} className={`${styles.multiDropdown} ${className}`}>
       <Input
         disabled={disabled}
         value={value.length > 0 ? getTitle(value) : search}
@@ -77,13 +77,21 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
           setSearch(value);
         }}
         placeholder={getTitle(value)}
-        afterSlot={<ArrowDownIcon style={{ cursor: 'pointer' }} color="secondary" />}
+        afterSlot={
+          <button onClick={() => setIsOpen(true)}>
+            <ArrowDownIcon color="secondary" />
+          </button>
+        }
         onClick={() => (!disabled ? setIsOpen(true) : null)}
       />
       {isOpen && !disabled && filteredOptions.length > 0 && (
-        <div className="dropdown-options">
+        <div className={styles.dropdownOptions}>
           {filteredOptions.map((option) => (
-            <div className="dropdown-item" key={option.key} onClick={() => toggleOption(option)}>
+            <div
+              className={styles.dropdownItem}
+              key={option.key}
+              onClick={() => toggleOption(option)}
+            >
               <Text view="p-16" color={isSelected(option) ? 'accent' : 'primary'}>
                 {option.value}
               </Text>

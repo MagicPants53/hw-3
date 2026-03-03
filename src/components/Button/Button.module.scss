@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   max-height: 60px;
-  max-width: 180px;
+  max-width: 100%;
+  width: fit-content;
   overflow: hidden;
   padding: 1.5em 2.5em;
   background-color: $btn-bg-color;
@@ -16,8 +17,15 @@
   }
 }
 
+:global(.ghost) {
+  border: 2px solid $secondary-color;
+  background-color: $site-bg-color;
+  color: $primary-color;
+}
+
 :global(.btn_over) {
   background-color: $btn-over-color;
+  color: $btn-text-color;
 }
 :global(.btn_disabled) {
   background-color: $btn-disabled-color;

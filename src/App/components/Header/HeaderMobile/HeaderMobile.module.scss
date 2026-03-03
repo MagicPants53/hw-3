@@ -13,10 +13,81 @@
 .modal_actions {
   display: flex;
   gap: 1em;
+
+  .cartBtn,
+  .userBtn {
+    position: relative;
+    padding: 0.75rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover path {
+      stroke: $accent-color;
+      transition: all 0.2s ease;
+    }
+  }
+
+  .cartBadge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: $cart-badge-color;
+    color: $btn-text-color;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: breath 2s ease-in-out infinite;
+  }
+
+  .userInitials {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: $user-initials-color;
+    color: $btn-text-color;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: $user-initials-over-color;
+    }
+  }
 }
 
 .modal_tabs {
   display: flex;
   flex-direction: column;
   gap: 3em;
+}
+
+@keyframes breath {
+  from {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+  65% {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(0);
+  }
 }

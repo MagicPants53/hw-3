@@ -1,4 +1,4 @@
-.input-container {
+.inputContainer {
   position: relative;
   width: 100%;
 
@@ -8,7 +8,7 @@
 
 .input {
   width: 100%;
-  height: 52px;
+  height: 1.5em;
   padding: 14px 12px;
   gap: 8px;
   background-color: #ffffff;
@@ -24,7 +24,7 @@
   outline: none;
 }
 
-.input-after-slot {
+.inputAfterSlot {
   position: absolute;
   right: 12px;
 }

@@ -4,7 +4,7 @@ import styles from './Loader.module.scss';
 
 export type LoaderProps = {
   /** Размер */
-  size?: 's' | 'm' | 'l';
+  size?: 's' | 'm' | 'l' | 'xl';
   /** Дополнительный класс */
   className?: string;
 };
@@ -18,7 +18,13 @@ const Loader: React.FC<LoaderProps> = ({ size = 'l', className = '' }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`${styles.loader} ${
-        size === 's' ? styles.loader_small : size === 'l' ? styles.loader_large : ''
+        size === 's'
+          ? styles.loader_small
+          : size === 'l'
+            ? styles.loader_large
+            : size === 'xl'
+              ? styles.loader_huge
+              : ''
       } ${className}`}
     >
       <path
