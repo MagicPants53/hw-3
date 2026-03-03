@@ -9,8 +9,8 @@ import type { ProductCategory, ProductType } from '@/shared/entity/product';
 import { Meta } from '@/shared/utils/meta';
 import { mapRawProductsToList } from '@/shared/utils/productMapper';
 import { mapRawCategoryToList } from '@/shared/utils/categoryMapper';
-
-type SelectedCategoryIds = number[];
+import type { UserParams } from '@/shared/entity/userParams';
+import type { ApiConfig } from '@/shared/entity/apiConfig';
 
 type PrivateFields =
   | '_products'
@@ -25,12 +25,12 @@ type PrivateFields =
 
 class ProductStore {
   private _products: ProductType[] = [];
-  private _amount: number = 0;
+  private _amount = 0;
   private _meta: Meta = Meta.initial as Meta;
-  private _searchTerm: string = '';
-  private _currentPage: number = 1;
-  private _pageSize: number = 9;
-  private _selectedCategoryIds: SelectedCategoryIds = [];
+  private _searchTerm = '';
+  private _currentPage = 1;
+  private _pageSize = 9;
+  private _selectedCategoryIds: number[] = [];
   private _categoryList: ProductCategory[] = [];
   private _categoryMeta: Meta = Meta.initial as Meta;
 
@@ -91,7 +91,7 @@ class ProductStore {
     return this._pageSize;
   }
 
-  get selectedCategoryIds(): SelectedCategoryIds {
+  get selectedCategoryIds(): number[] {
     return this._selectedCategoryIds;
   }
 
@@ -136,7 +136,7 @@ class ProductStore {
           this._categoryMeta = Meta.error as Meta;
         }
       });
-    } catch (error) {
+    } catch {
       runInAction(() => {
         this._categoryMeta = Meta.error as Meta;
         this._categoryList = [];
@@ -144,7 +144,7 @@ class ProductStore {
     }
   }
 
-  setCategories(categoryIds: SelectedCategoryIds) {
+  setCategories(categoryIds: number[]) {
     runInAction(() => {
       this._selectedCategoryIds = categoryIds;
       this._currentPage = 1;
@@ -186,13 +186,13 @@ class ProductStore {
   }
 
   // Из читаемых params → Api
-  private mapUserParamsToStrapi(userParams?: any): any {
+  private mapUserParamsToStrapi(userParams?: UserParams): ApiConfig {
     const page = userParams?.page ?? this._currentPage;
     const limit = userParams?.limit ?? this._pageSize;
     const search = userParams?.search ?? this._searchTerm;
     const categoryIds = userParams?.categories ?? this._selectedCategoryIds;
 
-    const config: any = {
+    const config: ApiConfig = {
       populate: ['images', 'productCategory'],
       pagination: { page, pageSize: limit },
     };
@@ -213,14 +213,14 @@ class ProductStore {
     return config;
   }
 
-  async getProducts(userParams?: any) {
+  async getProducts(userParams?: UserParams) {
     this._meta = Meta.loading as Meta;
     this._products = [];
 
     const strapiConfig = this.mapUserParamsToStrapi(
       userParams || {
-        page: this._currentPage,
-        limit: this._pageSize,
+        page: this._currentPage.toString(),
+        limit: this._pageSize.toString(),
         search: this._searchTerm,
       }
     );

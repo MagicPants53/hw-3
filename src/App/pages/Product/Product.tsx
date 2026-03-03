@@ -42,7 +42,7 @@ const Product = () => {
 
         setProduct(mapRawToProduct(result.data.data));
         setMeta(Meta.success as Meta);
-      } catch (error) {
+      } catch {
         setMeta(Meta.error as Meta);
         setProduct(null);
       }

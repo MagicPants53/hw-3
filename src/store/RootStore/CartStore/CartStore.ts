@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Meta } from '@/shared/utils/meta';
 import type { ProductType } from '@/shared/entity/product';
 import { apiUrls } from '@/config/apiUrls';
+import type UserStore from '../UserStore';
 
 export type CartItem = {
   id?: number;
@@ -11,6 +12,7 @@ export type CartItem = {
   quantity: number;
   price: number;
   title: string;
+  product?: ProductType;
 };
 
 type PrivateFields = '_items' | '_meta' | '_totalPrice' | '_userStore';
@@ -18,9 +20,9 @@ type PrivateFields = '_items' | '_meta' | '_totalPrice' | '_userStore';
 class CartStore {
   private _items: CartItem[] = [];
   private _meta: Meta = Meta.initial as Meta;
-  private _totalPrice: number = 0;
-  private _productsCache: Map<number, ProductType> = new Map();
-  private _userStore: any = null;
+  private _totalPrice = 0;
+  private _productsCache = new Map<number, ProductType>();
+  private _userStore: UserStore | null = null;
 
   constructor() {
     makeObservable<CartStore, PrivateFields>(this, {
@@ -43,7 +45,7 @@ class CartStore {
     this.loadGuestCart();
   }
 
-  setUserStore(userStore: any) {
+  setUserStore(userStore: UserStore) {
     runInAction(() => {
       this._userStore = userStore;
     });
@@ -83,7 +85,7 @@ class CartStore {
   }
 
   async loadCart() {
-    if (!this.userStore.isAuth) {
+    if (!this.userStore?.isAuth) {
       runInAction(() => {
         this._meta = Meta.success as Meta;
       });
@@ -102,7 +104,7 @@ class CartStore {
         },
       });
       runInAction(() => {
-        this._items = data.map((item: any) => ({
+        this._items = data.map((item: CartItem) => ({
           id: item.id,
           originalProductId: item.originalProductId,
           documentId: item.documentId,
@@ -120,11 +122,11 @@ class CartStore {
     }
   }
 
-  async addItem(product: ProductType, quantity: number = 1) {
+  async addItem(product: ProductType, quantity = 1) {
     const key = product.id;
     this._productsCache.set(key, product);
 
-    if (this.userStore.isAuth) {
+    if (this.userStore?.isAuth) {
       try {
         await axios.post(
           apiUrls.cart.add,
@@ -164,7 +166,7 @@ class CartStore {
   }
 
   async removeItem(documentId: string) {
-    if (this.userStore.isAuth) {
+    if (this.userStore?.isAuth) {
       const item = this._items.find((item) => item.documentId === documentId);
       if (item) {
         await axios.post(

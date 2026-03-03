@@ -1,16 +1,18 @@
 import { useSearchParams } from 'react-router';
 import { runInAction } from 'mobx';
 
+import type { UserParams } from '@/shared/entity/userParams';
+
 import type ProductStore from '@/store/ProductStore';
 
 export const useProductQuerySync = (productStore: ProductStore) => {
-  const [_searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const updateUrl = () => {
     runInAction(() => {
-      const userParams: any = {
-        page: productStore.currentPage,
-        limit: productStore.pageSize,
+      const userParams: UserParams = {
+        page: String(productStore.currentPage),
+        limit: String(productStore.pageSize),
       };
 
       if (productStore.searchTerm) {
@@ -18,7 +20,7 @@ export const useProductQuerySync = (productStore: ProductStore) => {
       }
 
       if (productStore.selectedCategoryTitles.length > 0) {
-        userParams.categories = productStore.selectedCategoryTitles.join('\,');
+        userParams.categories = productStore.selectedCategoryTitles.join(',');
       }
 
       const queryString = new URLSearchParams(userParams).toString();
@@ -26,5 +28,5 @@ export const useProductQuerySync = (productStore: ProductStore) => {
     });
   };
 
-  return { updateUrl };
+  return { updateUrl, searchParams };
 };

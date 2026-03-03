@@ -19,6 +19,7 @@ import AuthModal from '../../AuthModal';
 import rootStore from '@/store/RootStore';
 
 import styles from './HeaderMobile.module.scss';
+import { observer } from 'mobx-react-lite';
 
 type HeaderMobileProps = {
   className?: string;
@@ -112,4 +113,4 @@ const HeaderMobile: FC<HeaderMobileProps> = ({ className }) => {
   );
 };
 
-export default HeaderMobile;
+export default observer(HeaderMobile);

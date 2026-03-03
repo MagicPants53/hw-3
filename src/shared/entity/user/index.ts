@@ -1,10 +1,10 @@
-export interface User {
+export type User = {
   id: number;
   username: string;
   email: string;
 }
 
-export interface AuthResponse {
+export type AuthResponse = {
   jwt: string;
   user: User;
 }

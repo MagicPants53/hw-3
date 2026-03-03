@@ -22,7 +22,7 @@ import { useProductQuerySync } from '@/store/RootStore/hooks/useProductQuerySync
 import styles from './Products.module.scss';
 
 const Products = () => {
-  const [searchParams, _setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const productStore = useLocalObservable(() => new ProductStore());
   const { updateUrl } = useProductQuerySync(productStore);
   const navigate = useNavigate();
@@ -35,9 +35,8 @@ const Products = () => {
       const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1;
       const limit = searchParams.get('limit') ? Number(searchParams.get('limit')) : 9;
       const search = searchParams.get('search') || '';
-      const categoryTitles = searchParams.get('categories')
-        ? searchParams.get('categories')!.split(',')
-        : [];
+      const categories = searchParams.get('categories');
+      const categoryTitles = categories !== null ? categories.split(',') : [];
 
       runInAction(() => {
         productStore['_currentPage'] = page;
@@ -45,11 +44,12 @@ const Products = () => {
         productStore['_searchTerm'] = search;
 
         if (categoryTitles.length > 0) {
-          const categoryIds = categoryTitles
-            .map((title) => productStore.categoryList.find((cat) => cat.title === title))
-            .filter(Boolean)
-            .map((cat) => cat!.id);
-          productStore['_selectedCategoryIds'] = categoryIds;
+          const categoryIds = categoryTitles.map((title) =>
+            productStore.categoryList.find((cat) => cat.title === title)
+          );
+          productStore['_selectedCategoryIds'] = categoryIds
+            .filter((cat) => cat !== undefined)
+            .map((cat) => cat.id);
         }
       });
 
@@ -105,7 +105,7 @@ const Products = () => {
   const clearFilters = () => {
     productStore.clearCategories();
     productStore.setSearchTerm('');
-    _setSearchParams({ page: '1', limit: '9' });
+    setSearchParams({ page: '1', limit: '9' });
   };
 
   const selectedCategories: Option[] = mapCategoryToOption(

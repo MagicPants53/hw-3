@@ -44,9 +44,8 @@ const Cart = () => {
 
   const handleChangeQuantity = (inc: boolean, item: CartItem) => {
     runInAction(() => {
-      inc
-        ? cartStore.updateQuantity(item.documentId, item.quantity + 1)
-        : cartStore.updateQuantity(item.documentId, item.quantity - 1);
+      if (inc) cartStore.updateQuantity(item.documentId, item.quantity + 1);
+      else cartStore.updateQuantity(item.documentId, item.quantity - 1);
     });
   };
 
